@@ -3,8 +3,6 @@ Pipeline for Analysing Nanopore Sequencing of Infection DNA
 
 ## Overview
 
-Please note: This repository is a work-in-progess!
-
 The scripts in this package are part of research efforts to use Nanopore sequencing data to diagnose infection, particularly urinary tract infection (UTI).
 The scripts use publicly available software and databases (some converted into Singularity containers for easy installation), and bespoke scripts to filter, analyse, compile, and present the diagnostic results.
 The goal of this pipeline is to provide scripts that can easily and quickly be installed on a Linux platform to analyse small volume Nanopore sequencing data.
@@ -19,6 +17,10 @@ This pipeline is currently under construction. The components currently in this 
 * Metaflye_associated_scripts: Scripts to facilitate running Metaflye to assemble contigs from sequencing reads
 * Medaka_associated_scripts: Scripts to facilitate running Medaka to polish contigs assembled from Nanopore reads
 * Prokka_associated_scripts: Scripts to facilites running Prokka to identify bacterial genes in DNA sequences
+* analysis_scripts: Bespoke scripts to aid in analysis of Nanopore-sequenced DNA processing and diagnosis
+* Singularity_containers_v1 : binary files for easy installation
+
+Please note: This repository is a work-in-progess.
 
 #### Centrifuge_associated_scripts: Scripts to facilitate running Centrifuge and formatting/analysing Centrifuge output
 
@@ -26,7 +28,7 @@ Centrifuge is a software that rapidly identifies bacterial and viral sequences i
 The script run_centrifuge_using_fastq_input.sh assumes that the Centrifuge software and Centrifuge reference data have already been downloaded and installed as per [Centrifuge download instructions](https://ccb.jhu.edu/software/centrifuge/manual.shtml).
 The script run_centrifuge_using_fastq_input.sh simply calls Centrifuge to identify bacterial and viral sequences in DNA data in FASTQ format.
 An additional analysis script uses R:
-. add_NCBI_names_to_centrifuge_output_for_one_sample.sh : Fetches the name of each identified bacterial/viral/fungal sequence by looking it up at NCBI over the internet.
+* add_NCBI_names_to_centrifuge_output_for_one_sample.sh : Fetches the name of each identified bacterial/viral/fungal sequence by looking it up at NCBI over the internet.
 
 #### CARD_RGI_associated_scripts: Scripts to facilitate running RGI with CARDL (or CARD) database, including filtering of input
 
@@ -36,8 +38,6 @@ The latest RGI software is available at [https://github.com/arpcard/rgi](https:/
 For convenience of script development (in an environment where root and docker are not available) followed by easy laboratory installation (onto a closed Linux platform so that patient DNA sequences are not required to be uploaded to an outside resource such as the Cloud), some versions of the RGI software appear here as a Singularity container.
 Before running RGI, one needs to download the associated CARD data resource, available at [https://card.mcmaster.ca/download](https://card.mcmaster.ca/download).
 The CARD/RGI resource is updated frequently, and the older RGI containers may not be compatible with the latest CARD database.
-. rgi_2023may.sif (for CARDL of 2023)
-. rgi_2022jun.sif (for CARD2020 of 2020)
 After obtaining the CARD data, it must be initialised before first use:
   wget https://card.mcmaster.ca/latest/data
   tar -xvf data ./card.json
@@ -53,39 +53,48 @@ However, infection diagnosis usually requires counting the number of DNA sequenc
 Also, preprocessing processes may require extensive coverage of the sequenced organism, which may not be the case with rapidly sequenced DNA for rapid diagnostic purposed.
 When rapidly sequenced DNA is the input and a lot of data and diagnostic information would be dropped by preprocessing processes, then using the raw fastq as input to CARD/RGI may give better results.
 When there is too much fastq input data to RGI (to rgi_2023may in particular), then excess sequences can be first removed by the BBTools dedup.sh script from [https://jgi.doe.gov/data-and-tools/software-tools/bbtools/](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/), provided here in the same directory as the RGI Singularity containers for convenience.
-. run_rgi_2023may_nudge_cardl_using_fastq_input.sh
-. run_rgi_2023may_main_cardl_using_fasta_input.sh (As input to this script, fasta files such as output from metaflye+medaka is needed.)
-. run_rgi_2022jun_with_card2020_using_fastq_input.sh
-. run_rgi_2022jun_with_card2020_using_fastq_input_filtered_to_remove_human_reads.sh (As input to this script, Centrifuge output is needed.)
-. run_rgi_2022jun_with_card2020_using_fasta_input.sh (As input to this script, fasta files such as output from metaflye+medaka is needed.)
+* run_rgi_2023may_nudge_cardl_using_fastq_input.sh
+* run_rgi_2023may_main_cardl_using_fasta_input.sh (As input to this script, fasta files such as output from metaflye+medaka is needed.)
+* run_rgi_2022jun_with_card2020_using_fastq_input.sh
+* run_rgi_2022jun_with_card2020_using_fastq_input_filtered_to_remove_human_reads.sh (As input to this script, Centrifuge output is needed.)
+* run_rgi_2022jun_with_card2020_using_fasta_input.sh (As input to this script, fasta files such as output from metaflye+medaka is needed.)
 
 #### Metaflye_associated_scripts: Scripts to facilitate running Metaflye to assemble contigs from sequencing reads
 
 Metafly is a software for producing consensus assemblies from multiple long-read sequencing reads such as those of Nanopore ([Kolmogorov et al. 2020](https://www.nature.com/articles/s41592-020-00971-x)).
 For convenience for a laboratory installation, a Singularity container is available here.
-. run_metaflye_using_fastq_input.sh (If metaflye is not able to assemble even one contig, then there will be no output.)
-. run_metaflye_using_fastq_input_filtered_to_remove_human_reads.sh (As input to this script, Centrifuge output is needed. If metaflye is not able to assemble even one contig, then there will be no output.)
+* run_metaflye_using_fastq_input.sh (If metaflye is not able to assemble even one contig, then there will be no output.)
+* run_metaflye_using_fastq_input_filtered_to_remove_human_reads.sh (As input to this script, Centrifuge output is needed. If metaflye is not able to assemble even one contig, then there will be no output.)
 
 #### Medaka_associated_scripts: Scripts to facilitate running Medaka to polish contigs assembled from Nanopore reads
 
 Medaka is a Nanopore-specific tools to polish and improve contigs assembled from Nanopore reads ([https://github.com/nanoporetech/medaka](https://github.com/nanoporetech/medaka)).
 It's use is recommended for after contigs have been assembled by Metaflye.
 For convenience for a laboratory installation, a Singularity container is available here.
-. run_medaka_using_fasta_input.sh (As input to this script, Metaflye fasta output would be used.)
+* run_medaka_using_fasta_input.sh (As input to this script, Metaflye fasta output would be used.)
 
 #### Prokka_associated_scripts: Scripts to facilites running Prokka to identify bacterial genes in DNA sequences
 
 Prokka is a software to identify genes in bacterial contig assemblies. It is recommended to use Metaflye+Medaka output as input here.
 For convenience for a laboratory installation, a Singularity container is available here.
-. run_prokka_using_fasta_input.sh (As input to this script, Metaflye+Medaka fasta output would be used.)
+* run_prokka_using_fasta_input.sh (As input to this script, Metaflye+Medaka fasta output would be used.)
 
 #### analysis_scripts: Bespoke scripts to aid in analysis of Nanopore-sequenced DNA processing and diagnosis
 
 After Centrifuge has identified which bacterial/viral species are in the Nanopore DNA data, let's map the sequencing reads to those species' genomes using Minimap2 and view the result.
 Integrative Genomics Viewer (IGV) is a tool typically used to view alignments to reference sequences. However, it doesn't show a high-level view alignments and sequencing coverage (and instead invites you to zoom in to see coverage).
 After aligning, let's plot the alignments to the Centrifuge-identified species, to see how well those organisms are covered by sequencing.
-. fetch_and_align_all_centrifuge_organisms_of_a_sample.sh
-. align_reads_to_centrifuge_organisms_having_100_or_more_reads.sh
+* fetch_and_align_all_centrifuge_organisms_of_a_sample.sh
+* align_reads_to_centrifuge_organisms_having_100_or_more_reads.sh
+
+#### Singularity_containers_v1 : binary files for easy installation
+
+This pipeline uses several publicly available softwares and is designed to be able to be installed on the same linux laptop controlling the Nanopore sequencing instrument (eg. in a regional hospital diagnostic lab).
+To facilitate installation of the various softwares, they are provided as Singularity containers.
+Once Singularity has been installed [(instructions at https://docs.sylabs.io/guides/3.0/user-guide/installation.html)](https://docs.sylabs.io/guides/3.0/user-guide/installation.html),
+installation of any softwares available as a Singularity container is a simple matter of copying the sif file.
+To download the Singularity containers:
+* wget https://github.com/emmamrath/pipeline_for_analysing_Nanopore_sequencing_of_infection_DNA/releases/download/Singularity_containers_v1/rgi_2022jun.sif
 
 ## References
 
