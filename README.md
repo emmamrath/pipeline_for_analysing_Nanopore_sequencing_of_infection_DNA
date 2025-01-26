@@ -18,7 +18,7 @@ This pipeline is currently under construction. The components currently in this 
 * Medaka_associated_scripts: Scripts to facilitate running Medaka to polish contigs assembled from Nanopore reads
 * Prokka_associated_scripts: Scripts to facilites running Prokka to identify bacterial genes in DNA sequences
 * analysis_scripts: Bespoke scripts to aid in analysis of Nanopore-sequenced DNA processing and diagnosis
-* Singularity_containers_v1 : binary files for easy installation
+* Releases : Singularity_containers_v1 : binary files for easy installation
 
 Please note: This repository is a work-in-progess.
 
@@ -49,15 +49,15 @@ There are various scripts for running CARD/RGI using one of the RGI Singularity 
 RGI is designed to use fasta formatted input.
 Nanopore sequencing data is usually provided in fastq.gz format, which requires bzgip for decompression. An htslib Singularity container is provided for convenience access to bzgip.
 Processing fastq sequences through various processes before calling CARD/RGI can merge multiple fastq sequences to produce appropriate high-confidence fasta data for input to CARD/RGI.
-However, infection diagnosis usually requires counting the number of DNA sequences having evidence of antimicrobial resistance and counting the number that match organisms, in which case, raw fastq is needed as input to CARD/RGI.
+However, infection diagnosis usually requires counting the number of DNA sequences having evidence of antimicrobial resistance and counting the number that match organisms, in which case, raw fastq.gz is needed as input to CARD/RGI.
 Also, preprocessing processes may require extensive coverage of the sequenced organism, which may not be the case with rapidly sequenced DNA for rapid diagnostic purposed.
 When rapidly sequenced DNA is the input and a lot of data and diagnostic information would be dropped by preprocessing processes, then using the raw fastq as input to CARD/RGI may give better results.
 When there is too much fastq input data to RGI (to rgi_2023may in particular), then excess sequences can be first removed by the BBTools dedup.sh script from [https://jgi.doe.gov/data-and-tools/software-tools/bbtools/](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/), provided here in the same directory as the RGI Singularity containers for convenience.
 * run_rgi_2023may_nudge_cardl_using_fastq_input.sh
-* run_rgi_2023may_main_cardl_using_fasta_input.sh (As input to this script, fasta files such as output from metaflye+medaka is needed.)
+* run_rgi_2023may_main_cardl_using_fasta_input.sh (As input to this script, fasta file such as output from metaflye+medaka is needed.)
 * run_rgi_2022jun_with_card2020_using_fastq_input.sh
 * run_rgi_2022jun_with_card2020_using_fastq_input_filtered_to_remove_human_reads.sh (As input to this script, Centrifuge output is needed.)
-* run_rgi_2022jun_with_card2020_using_fasta_input.sh (As input to this script, fasta files such as output from metaflye+medaka is needed.)
+* run_rgi_2022jun_with_card2020_using_fasta_input.sh (As input to this script, fasta file such as output from metaflye+medaka is needed.)
 
 #### Metaflye_associated_scripts: Scripts to facilitate running Metaflye to assemble contigs from sequencing reads
 
@@ -87,7 +87,7 @@ After aligning, let's plot the alignments to the Centrifuge-identified species, 
 * fetch_and_align_all_centrifuge_organisms_of_a_sample.sh
 * align_reads_to_centrifuge_organisms_having_100_or_more_reads.sh
 
-#### Singularity_containers_v1 : binary files for easy installation
+#### Releases : Singularity_containers_v1 : binary files for easy installation
 
 This pipeline uses several publicly available softwares and is designed to be able to be installed on the same linux laptop controlling the Nanopore sequencing instrument (eg. in a regional hospital diagnostic lab).
 To facilitate installation of the various softwares, they are provided as Singularity containers.
