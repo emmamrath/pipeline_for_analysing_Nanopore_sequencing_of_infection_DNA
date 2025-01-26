@@ -91,9 +91,9 @@ After aligning, let's plot the alignments to the Centrifuge-identified species, 
 
 This pipeline uses several publicly available softwares and is designed to be able to be installed on the same linux laptop controlling the Nanopore sequencing instrument (eg. in a regional hospital diagnostic lab).
 To facilitate installation of the various softwares, they are provided as Singularity containers.
-Once Singularity has been installed [(instructions at https://docs.sylabs.io/guides/3.0/user-guide/installation.html)](https://docs.sylabs.io/guides/3.0/user-guide/installation.html),
-installation of any softwares available as a Singularity container is a simple matter of copying the sif file.
-To download the Singularity containers:
+Once Singularity has been installed (instructions at [https://docs.sylabs.io/guides/3.0/user-guide/installation.html])(https://docs.sylabs.io/guides/3.0/user-guide/installation.html),
+installation of any softwares available as a Singularity container is a simple matter of copying the sif file that is the Singularity container for that software.
+To download the Singularity containers used by this pipeline, please carry out the following on the linux command line, and then update any *.sh scripts that your run to set the singularity_directory variable to where you have downloaded:
 * wget https://github.com/emmamrath/pipeline_for_analysing_Nanopore_sequencing_of_infection_DNA/releases/download/Singularity_containers_v1/rgi_2022jun.sif
 
 ## References
