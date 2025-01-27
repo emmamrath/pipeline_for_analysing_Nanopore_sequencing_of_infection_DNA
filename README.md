@@ -83,7 +83,7 @@ For convenience for a laboratory installation, a Singularity container is availa
 
 After Centrifuge has identified which bacterial/viral species are in the Nanopore DNA data, let's map the sequencing reads to those species' genomes using Minimap2 and view the result.
 Integrative Genomics Viewer (IGV) is a tool typically used to view alignments to reference sequences. However, it doesn't show a high-level view alignments and sequencing coverage (and instead invites you to zoom in to see coverage).
-After aligning, let's plot the alignments to the Centrifuge-identified species, to see how well those organisms are covered by sequencing.
+After aligning, let's plot the alignments to the Centrifuge-identified species, to see how well those organisms are covered by sequencing (see further below for example plots).
 * fetch_and_align_all_centrifuge_organisms_of_a_sample.sh
 * align_reads_to_centrifuge_organisms_having_100_or_more_reads.sh
 
@@ -122,4 +122,11 @@ To download the Singularity containers used by this pipeline, please carry out t
 [Seemann T.](https://academic.oup.com/bioinformatics/article/30/14/2068/2390517?login=false)
 [Prokka: rapid prokaryotic genome annotation.](https://academic.oup.com/bioinformatics/article/30/14/2068/2390517?login=false)
 [Bioinformatics. 2014 Jul 15;30(14):2068-9. doi: 10.1093/bioinformatics/btu153. Epub 2014 Mar 18. PMID: 24642063.](https://academic.oup.com/bioinformatics/article/30/14/2068/2390517?login=false)
+
+## Example plots
+
+![](images/ERR3077518.samtools_depth_and_more_summary.png)
+![](images/ERR3077519.samtools_depth_and_more_summary.png)
+![](images/ERR3077531.samtools_depth_and_more_summary.png)
+![](images/ERR3077543.samtools_depth_and_more_summary.png)
 
