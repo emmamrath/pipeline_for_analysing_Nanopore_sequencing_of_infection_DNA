@@ -125,8 +125,12 @@ To download the Singularity containers used by this pipeline, please carry out t
 
 ## Example plots
 
-![](images/ERR3077518.samtools_depth_and_more_summary.png)
-![](images/ERR3077519.samtools_depth_and_more_summary.png)
-![](images/ERR3077531.samtools_depth_and_more_summary.png)
-![](images/ERR3077543.samtools_depth_and_more_summary.png)
-
+<br>
+<img src="ERR3077518.samtools_depth_and_more_summary.png" alt="My Image" width="300">
+<br>
+<img src="ERR3077519.samtools_depth_and_more_summary.png" alt="My Image" width="300">
+<br>
+<img src="ERR3077531.samtools_depth_and_more_summary.png" alt="My Image" width="300">
+<br>
+<img src="ERR3077543.samtools_depth_and_more_summary.png" alt="My Image" width="300">
+<br>
