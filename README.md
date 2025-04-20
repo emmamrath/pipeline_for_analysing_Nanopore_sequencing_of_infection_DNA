@@ -22,6 +22,27 @@ This pipeline is currently under construction. The components currently in this 
 
 Please note: This repository is a work-in-progess.
 
+#### config.sh and Singularity containers
+
+Most (and one day all) of the software in this pipeline are contained in Singularity containers, for ease of installation.
+Please install Singularity and then download the Singularity containers. Edit config.sh to point to where the containers have been downloaded.
+This will result in the softwares being available to run, as if they were installed individually, because the softwares are installed inside the Singularity containers.
+Singularity containers are similar to Docker containers, and, unlike Docker containers, can be used on a machine where you do not have root access.
+The Singularity containers for this pipeline are stored on zenodo.org, because they are too big to be stored here in github.
+
+Download the Singularity containers used in this pipeline:
+cd /path/to/downloaded/singularity/containers
+wget https://zenodo.org/records/15250562/files/medaka_singularity.sif?download=1
+wget https://zenodo.org/records/15250727/files/prokka.sif?download=1
+wget https://zenodo.org/records/15250484/files/rgi_singularity.sif?download=1
+wget https://zenodo.org/records/15250767/files/flye_singularity.sif?download=1
+
+So that the various scripts in this pipeline will know where to find those downloaded containers, update config.sh
+nano config.sh
+(change singularity_directory=/path/to/downloaded/singularity/containers to point to the directory containing the downloaded container)
+(also change the other variables to point to where you have downloaded other data resources and softwares)
+
+
 #### Centrifuge_associated_scripts: Scripts to facilitate running Centrifuge and formatting/analysing Centrifuge output
 
 Centrifuge is a software that rapidly identifies bacterial and viral sequences in DNA data ([Kim et al. 2016](https://genome.cshlp.org/content/26/12/1721)).

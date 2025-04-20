@@ -4,10 +4,15 @@ infile=$1 # Input file in fastq.gz format.
 in_centrifuge=$2 # Input file containing the Centrifuge _output_by_read output file, which identifies which sequencing reads are human DNA.
 outdir=$3 # Output directory for the Metaflye output. A directory below this directory will be created for this specific input, using the input file name.
 
-metaflye_singularity_container=./metaflye_singularity.sif
+#singularity_directory=/path/to/downloaded/singularity/containers
+. ../config.sh
 
-htslib_singularity_container=$(dirname $metaflye_singularity_container)
-htslib_singularity_container="${htslib_singularity_container}"/htslib_singularity.sif
+if [[ $singularity_directory == '/path/to/downloaded/singularity/containers' ]]; then
+  echo 'In script Metaflye_associated_scripts/run_rgi_2022jun_with_card2020_using_fastq_input.sh, please set the variable $singularity_directory to where you downloaded the Singularity containers when you ran the command: wget https://github.com/emmamrath/pipeline_for_analysing_Nanopore_sequencing_of_infection_DNA/releases/download/Singularity_containers_v1/*.sif'
+fi
+
+metaflye_singularity_container=$singularity_directory/metaflye_singularity.sif
+htslib_singularity_container=$singularity_directory/htslib_singularity.sif
 
 indir=$(dirname $infile)
 infile_basename=$(basename $infile)

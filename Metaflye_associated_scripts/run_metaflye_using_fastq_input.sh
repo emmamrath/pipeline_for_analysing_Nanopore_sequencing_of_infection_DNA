@@ -3,7 +3,14 @@
 infile_fastq=$1 # Input file in fastq.gz format.
 outdir=$2 # Output directory for the Metaflye output. A directory below this directory will be created for this specific input, using the input file name.
 
-metaflye_singularity_container=./metaflye_singularity.sif
+#singularity_directory=/path/to/downloaded/singularity/containers
+. ../config.sh
+
+if [[ $singularity_directory == '/path/to/downloaded/singularity/containers' ]]; then
+  echo 'In script Metaflye_associated_scripts/Metaflye_associated_scripts/run_metaflye_using_fastq_input.sh, please set the variable $singularity_directory to where you downloaded the Singularity containers when you ran the command: wget https://github.com/emmamrath/pipeline_for_analysing_Nanopore_sequencing_of_infection_DNA/releases/download/Singularity_containers_v1/*.sif'
+fi
+
+metaflye_singularity_container=$singularity_directory/metaflye_singularity.sif
 
 indir=$(dirname $infile_fastq)
 infile_basename=$(basename $infile_fastq)

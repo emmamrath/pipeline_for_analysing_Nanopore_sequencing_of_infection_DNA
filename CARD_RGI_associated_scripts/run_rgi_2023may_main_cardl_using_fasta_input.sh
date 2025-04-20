@@ -3,12 +3,18 @@
 infile=$1 # Input file in fasta.gz format.
 outdir=$2 # Output directory for the CARD/RGI output for one sample. Make sure each sample has its own output directory.
 
-card_json_resource=/path/to/downloaded/card/json/file/card.json
-rgi_singularity_container=./rgi_2023may_singularity.sif
+#card_json_resource=/path/to/downloaded/card/json/file/card.json
+#singularity_directory=/path/to/downloaded/singularity/containers
+. ../config.sh
 
 if [[ $card_json_resource == '/path/to/downloaded/card/json/file/card.json' ]]; then
-  echo 'In script run_rgi_2023may_main_cardl_using_fasta_input.sh, please set the variable $card_json_resource to where you have installed the CARD database file card.json.'
+  echo 'In script CARD_RGI_associated_scripts/run_rgi_2023may_main_cardl_using_fasta_input.sh, please set the variable $card_json_resource to where you have installed the CARD database file card.json.'
 fi
+if [[ $singularity_directory == '/path/to/downloaded/singularity/containers' ]]; then
+  echo 'In script CARD_RGI_associated_scripts/run_rgi_2023may_main_cardl_using_fasta_input.sh, please set the variable $singularity_directory to where you downloaded the Singularity containers when you ran the command: wget https://github.com/emmamrath/pipeline_for_analysing_Nanopore_sequencing_of_infection_DNA/releases/download/Singularity_containers_v1/*.sif'
+fi
+
+rgi_singularity_container=$singularity_directory/rgi_2023may_singularity.sif
 
 currdir=$outdir
 output_prefix="${currdir}"/output_rgi_2023may_main_cardl_fasta_input

@@ -9,10 +9,21 @@ indir_seqID_fasta=/path/to/input/data/fasta/downloaded/from/NCBI/by/etch_and_ali
 outdir=/path/to/writable/output/directory/for/this/sample
 tmpdir=/path/to/writable/temporary/directory/for/this/sample
 
-samtools_path=/path/to/samtools/software/directory
-minimap_path=/path/to/minimap/software/directory
-bwa_path=/path/to/bwa/software/directory
+#samtools_path=/path/to/samtools/software/directory
+#minimap_path=/path/to/minimap/software/directory
+#bwa_path=/path/to/bwa/software/directory
 # Please note that this script uses Rscript and thus needs R and libraries to be installed.
+. ../config.sh
+
+if [[ $samtools_path == '/path/to/samtools/software/directory' ]]; then
+  echo 'In script analysis_scripts/align_reads_to_centrifuge_organisms_having_100_or_more_reads.sh, please set the variable $samtools_path to where you have installed the samtools software.'
+fi
+if [[ $minimap_path == '/path/to/minimap/software/directory' ]]; then
+  echo 'In script analysis_scripts/align_reads_to_centrifuge_organisms_having_100_or_more_reads.sh, please set the variable $minimap_path to where you have installed the minimap2 software.'
+fi
+if [[ $bwa_path == '/path/to/bwa/software/directory' ]]; then
+  echo 'In script analysis_scripts/align_reads_to_centrifuge_organisms_having_100_or_more_reads.sh, please set the variable $bwa_path to where you have installed the bwa software.'
+fi
 
 outfile_genome="${outdir}"/"${sample}".genome.fasta
 outfile_genome_gz="${outdir}"/"${sample}".gz

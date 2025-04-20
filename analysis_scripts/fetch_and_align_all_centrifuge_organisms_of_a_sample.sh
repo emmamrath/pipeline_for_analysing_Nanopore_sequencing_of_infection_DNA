@@ -9,9 +9,17 @@ outdir_sample_genome=/path/to/writable/directory/where/a/reference/genome/for/th
 outdir_sample_bam=/path/to/writable/directory/where/bam/alignment/file/will/be/created
 tmpdir=/path/to/writable/temporary/directory/to/process/this/sample
 
-samtools_path=/path/to/samtools/software/directory
-minimap_path=/path/to/minimap/software/directory
+#samtools_path=/path/to/samtools/software/directory
+#minimap_path=/path/to/minimap/software/directory
 # Please note that this script uses Rscript and thus needs R and libraries to be installed.
+. ../config.sh
+
+if [[ $samtools_path == '/path/to/samtools/software/directory' ]]; then
+  echo 'In script analysis_scripts/fetch_and_align_all_centrifuge_organisms_of_a_sample.sh, please set the variable $samtools_path to where you have installed the samtools software.'
+fi
+if [[ $minimap_path == '/path/to/minimap/software/directory' ]]; then
+  echo 'In script analysis_scripts/fetch_and_align_all_centrifuge_organisms_of_a_sample.sh, please set the variable $minimap_path to where you have installed the minimap2 software.'
+fi
 
 echo ''
 echo '##################################################'

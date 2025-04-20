@@ -4,7 +4,14 @@ infile_fastq=$1 # Input file of sequencing reads in fastq.gz format.
 infile_draft_assembly=$2 # Input file of assembled contigs in fasta format. This input will be the assembly.fasta output file from Metaflye.
 outdir=$3 # Output directory for the Medaka output. A directory below this directory will be created for this specific input sample, using the input file name.
 
-medaka_singularity_container=./medaka_singularity.sif
+#singularity_directory=/path/to/downloaded/singularity/containers
+. ../config.sh
+
+if [[ $singularity_directory == '/path/to/downloaded/singularity/containers' ]]; then
+  echo 'In script Medaka_associated_scripts/run_medaka_using_fasta_input.sh, please set the variable $singularity_directory to where you downloaded the Singularity containers when you ran the command: wget https://github.com/emmamrath/pipeline_for_analysing_Nanopore_sequencing_of_infection_DNA/releases/download/Singularity_containers_v1/*.sif'
+fi
+
+medaka_singularity_container=$singularity_directory/medaka_singularity.sif
 
 indir_fastq=$(dirname $infile_fastq)
 infile_basename=$(basename $infile_fastq)
