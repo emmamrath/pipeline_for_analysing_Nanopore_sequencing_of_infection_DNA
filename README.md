@@ -22,7 +22,7 @@ This pipeline is currently under construction. The components currently in this 
 
 Please note: This repository is a work-in-progess.
 
-#### config.sh and Singularity containers
+#### Singularity containers and config.sh
 
 Most (and one day all) of the software in this pipeline are contained in Singularity containers, for ease of installation.
 Please install Singularity and then download the Singularity containers. Edit config.sh to point to where the containers have been downloaded.
